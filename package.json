@@ -1,0 +1,13 @@
+{
+  "name": "0everything",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "nostr-dev": "pnpm --filter nostr dev",
+    "nostr-deploy": "pnpm --filter nostr deployd"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

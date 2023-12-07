@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Read environment variables from .env file
+set -a
+source .env
+set +a
+
+# Check if Flyctl is installed
+if ! command -v fly; then
+  echo "Fly is not installed. Please install it first."
+  exit 1
+fi
+
+# Define the app name
+
+# Extract environment variables from the .env file
+env_vars=""
+for var in $(grep -E '^[^=]+=' .env | sed 's|=.*||'); do
+  # Add a space after the equal sign
+  env_vars="$env_vars --env $var=$(cat .env | grep "^$var=" | cut -d '=' -f 2)"
+done
+
+# Deploy the app with the extracted environment variables
+fly deploy $env_vars

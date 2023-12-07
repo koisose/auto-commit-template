@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Get the directory of the script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Define the target directory
+TARGET_DIR="$SCRIPT_DIR/packages"
+
+# Define the output file
+README_FILE="$SCRIPT_DIR/README.md"
+
+# Check if target directory exists
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "Error: Directory '$TARGET_DIR' does not exist."
+  exit 1
+fi
+
+# Create the README.md file if it doesn't exist or clear its content
+if [ ! -f "$README_FILE" ]; then
+  touch "$README_FILE"
+else
+  echo "" > "$README_FILE"
+fi
+
+# Add header and blank line
+echo "# List of Projects" >> "$README_FILE"
+echo "" >> "$README_FILE"
+
+# Loop through each child in the target directory
+for entry in "$TARGET_DIR"/*; do
+  # Check if entry is a directory
+  if [ -d "$entry" ]; then
+    # Get the relative path and folder name
+    relative_path="${entry#$TARGET_DIR/}"
+    folder_name="${entry##*/}"
+
+    # Add folder name with link to README.md in the target directory
+    echo "* [$folder_name](./packages/$relative_path)" >> "$README_FILE"
+  fi
+done
+
+echo "Successfully updated README.md in '$SCRIPT_DIR'."
