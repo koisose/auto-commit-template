@@ -52,6 +52,11 @@
   },
   "dependencies": {
     "@google-ai/generativelanguage": "^1.1.0",
-    "google-auth-library": "^9.4.1"
+    "@resvg/resvg-js": "^2.6.0",
+    "@vercel/og": "^0.5.20",
+    "google-auth-library": "^9.4.1",
+    "playwright": "^1.40.1",
+    "satori": "^0.10.11",
+    "sharp": "^0.33.0"
   }
 }
