@@ -2,7 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import NostrComponent from '~/components/nostr/nostr';
-
+import {encodeToHex} from '~/utils/create-image'
 export const useDomain = routeLoader$((requestEvent) => {
   return process.env.NODE_ENV !== "production"?requestEvent.request.url:requestEvent.request.url.replace(/http:\/\//g, 'https://'); // returns the domain name
 });
@@ -26,7 +26,7 @@ export const head: DocumentHead = ({ resolveValue }) => {
       },
       {
         property: "og:image",
-        content: `${domain}og/${encodeURIComponent(domain)+".png"}`,
+        content: `${domain}og/${encodeToHex(domain)+".png"}`,
       },
       {
             "name": "twitter:card",
@@ -50,7 +50,7 @@ export const head: DocumentHead = ({ resolveValue }) => {
         },
         {
             "property": "twitter:image",
-          "content": `${domain}og/${encodeURIComponent(domain)+".png"}`
+          "content": `${domain}og/${encodeToHex(domain)+".png"}`
         },
       {
         "property": "og:image:type",

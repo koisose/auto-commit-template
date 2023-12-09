@@ -1,9 +1,15 @@
 import { type RequestHandler } from '@builder.io/qwik-city';
 import fs from 'fs';
 import path from 'path';
-import {generateOgImage} from '~/utils/create-image'
+import addJobToQueue from '~/utils/bullmq/queue';
+
+
+
 
 export const onGet: RequestHandler = async ({params, send }) => {
+
+    const data = { jobName: 'create-image', id:params.id };
+    const job = await addJobToQueue(data);
     const fileName = path.resolve('./src/media/'+params.id);
 
     if (fs.existsSync(fileName)) {

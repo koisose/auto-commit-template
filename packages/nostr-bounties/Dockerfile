@@ -12,3 +12,4 @@ RUN apk add --no-cache \
 COPY . .
 RUN pnpm build
 CMD node server/entry.express
+

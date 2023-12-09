@@ -1,9 +1,10 @@
-// jobProcessor.js
+import {generateOgImage} from '../create-image'
 const jobProcessor = async (job) => {
   await job.log(`Started processing job with id ${job.id}`);
-  // TODO: do your CPU intense logic here
-  await extractCSVData(job?.data);
 
+  if(job?.data?.jobName==='create-image'){
+    await generateOgImage(job?.data?.id);
+  }
   await job.updateProgress(100);
   return 'DONE';
 };
