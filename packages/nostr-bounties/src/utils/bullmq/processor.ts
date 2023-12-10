@@ -1,4 +1,5 @@
 import {generateOgImage} from '../create-image'
+// @ts-ignore
 const jobProcessor = async (job) => {
   await job.log(`Started processing job with id ${job.id}`);
 

@@ -1,15 +1,50 @@
-FROM node:20.3-alpine as builder
-WORKDIR qwik-multi-tenancy
+# Use Node.js Alpine as a builder
+FROM node:20.3-alpine AS builder
+
+# Create app working directory
+WORKDIR /qwik-multi-tenancy
+
+# Enable corepack and install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
+# Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --no-frozen-lockfile
-RUN npx playwright install
-ENV NODE_ENV production
-RUN apk add --no-cache \
-    udev \
-    ttf-freefont \
-    chromium
-COPY . .
-RUN pnpm build
-CMD node server/entry.express
 
+# Install playwright
+
+
+# Set environment variable
+ENV NODE_ENV production
+
+# Install necessary system packages
+
+
+# Copy rest files
+COPY . .
+
+# Build the app
+RUN pnpm build
+
+#================================
+
+# Use Node.js alpine for the final image
+FROM node:20.3-alpine
+
+# Install Redis and Supvervisord
+RUN apk add --update redis supervisor
+COPY redis.conf /qwik-multi-tenancy/redis.conf
+# Copy supervisord config
+COPY supervisord.conf /etc/supervisor.d/supervisord.conf
+
+# Copy Node.js app from builder
+COPY --from=builder /qwik-multi-tenancy /qwik-multi-tenancy
+
+# Set working directory
+WORKDIR /qwik-multi-tenancy
+RUN npx playwright install
+RUN apk --no-cache add udev ttf-freefont chromium
+# Expose port
+EXPOSE 3000
+
+# Start Supervisord
+CMD ["supervisord", "-c", "/etc/supervisor.d/supervisord.conf"]

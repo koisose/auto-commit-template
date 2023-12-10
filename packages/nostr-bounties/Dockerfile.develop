@@ -6,19 +6,18 @@ WORKDIR /qwik-multi-tenancy
 
 # Enable corepack and install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
-
 # Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --no-frozen-lockfile
 
 # Install playwright
-RUN npx playwright install
+
 
 # Set environment variable
 ENV NODE_ENV production
 
 # Install necessary system packages
-RUN apk --no-cache add udev ttf-freefont chromium
+
 
 # Copy rest files
 COPY . .
@@ -42,7 +41,8 @@ COPY --from=builder /qwik-multi-tenancy /qwik-multi-tenancy
 
 # Set working directory
 WORKDIR /qwik-multi-tenancy
-
+RUN npx playwright install
+RUN apk --no-cache add udev ttf-freefont chromium
 # Expose port
 EXPOSE 3000
 

@@ -3,17 +3,17 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-export function decodeFromHex(hexUrl) {
+export function decodeFromHex(hexUrl:string) {
     const buffer = Buffer.from(hexUrl, 'hex');
     return buffer.toString('utf-8');
 }
-export function encodeToHex(url) {
+export function encodeToHex(url:string) {
     const buffer = Buffer.from(url, 'utf-8');
     const hexUrl = buffer.toString('hex');
 
     return hexUrl;
 }
-export async function generateOgImage(url: string): void {
+export async function generateOgImage(url: string): Promise<void> {
 
     const decoded=decodeFromHex(url.split('.').slice(0, -1).join('.'));
     const browser = await playwright.chromium.launch({

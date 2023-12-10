@@ -8,10 +8,10 @@ import addJobToQueue from '~/utils/bullmq/queue';
 
 export const onGet: RequestHandler = async ({params, send }) => {
 
-    const data = { jobName: 'create-image', id:params.id };
-    const job = await addJobToQueue(data);
     const fileName = path.resolve('./src/media/'+params.id);
-
+try{
+    const data = { jobName: 'create-image', id:params.id };
+    await addJobToQueue(data);
     if (fs.existsSync(fileName)) {
         const imageBuffer = fs.readFileSync(fileName);
         send(new Response(imageBuffer, {
@@ -30,6 +30,17 @@ export const onGet: RequestHandler = async ({params, send }) => {
             },
         }));
     }
+}catch(e){
+    const imageBuffer = fs.readFileSync(path.resolve('./src/media/thunder.png'));
+    send(new Response(imageBuffer, {
+        status: 200,
+        headers: {
+            'Content-Type': 'image/png',
+        },
+    }));
+}
+
+
 
 };
 
