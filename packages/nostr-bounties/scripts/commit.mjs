@@ -48,7 +48,9 @@ async function run() {
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        console.log(text)
+        console.log(text);
+        execSync(`printf "${text.replace(/\`/gi, '\\\`')}" | git commit -F-`);
+        execSync('git push -u origin HEAD')
         process.exit();
     }else{
         execSync(`git reset`);
