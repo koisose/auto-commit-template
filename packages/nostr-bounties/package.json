@@ -23,7 +23,8 @@
     "preview": "qwik build preview && vite preview --open",
     "serve": "node server/entry.express",
     "start": "node server/entry.express",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "commit": "node scripts/commit.mjs"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.2.19",

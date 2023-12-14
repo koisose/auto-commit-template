@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "nostr-dev": "pnpm --filter nostr dev",
-    "nostr-deploy": "pnpm --filter nostr deployd"
+    "nostr-deploy": "pnpm --filter nostr deployd",
+    "nostr-commit": "pnpm --filter nostr commit"
   },
   "keywords": [],
   "author": "",
