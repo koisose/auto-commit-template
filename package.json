@@ -6,7 +6,7 @@
   "scripts": {
     "nostr-dev": "pnpm --filter nostr dev",
     "nostr-deploy": "pnpm --filter nostr deployd",
-    "nostr-commit": "pnpm --filter nostr commit"
+    "commit": "pnpm --filter scripts commit"
   },
   "keywords": [],
   "author": "",

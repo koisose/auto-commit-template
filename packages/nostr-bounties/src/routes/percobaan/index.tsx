@@ -105,10 +105,16 @@ export const head: DocumentHead = ({ resolveValue }) => {
 };
 };
 export default component$(() => {
-  //
+  //   <NostrComponent/>
   return (
     <>
-    <NostrComponent/>
+    <div class="flex flex-col m-5">
+      <textarea class="rounded-md border border-gray-300 p-2 grow mb-2"></textarea>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Submit</button>
+    </div>
+    <div class="m-5 rounded-md bg-gray-200 border border-gray-300 p-4 shadow-md">
+      
+    </div>
 
 
     </>
