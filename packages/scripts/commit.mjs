@@ -9,15 +9,13 @@ const systemMessage=`You are a commit message generator by creating exactly one 
 
 ---
 <emoji> <type>(<scope>): <subject>
-<BLANK LINE>
 <body>
 ---
 
-With allowed <type> values are feat, fix, perf, docs, style, refactor, test, and build. And here's an example of a good commit message:
+With allowed <type> values are feat, fix, perf, docs, style, refactor, test, and build. Translate the commit <subject> and <body> to indonesian language. And here's an example of a good commit message:
 
 ---
 😆 fix(middleware): ensure Range headers adhere more closely to RFC 2616
-
 Add one new dependency, use \`range-parser\` (Express dependency) to compute range. It is more well-tested in the wild.
 ---
 
@@ -49,6 +47,7 @@ async function run() {
         const response = await result.response;
         const text = response.text();
         console.log(text);
+//        execSync(`git reset`);
         execSync(`printf "${text.replace(/\`/gi, '\\\`')}" | git commit -F-`);
         execSync('git push -u origin HEAD')
         process.exit();
