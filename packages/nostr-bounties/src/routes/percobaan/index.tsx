@@ -5,8 +5,14 @@ import {encodeToHex} from '~/utils/encode'
 import {textGenerate} from '@koisose/ai'
 
 
-const generateText = server$(async (prompt:string) => {
-  return await textGenerate(process.env.GOOGLE_API_KEY,prompt);
+const generateText = server$(async function*(prompt:string) {
+  const response=await textGenerate(process.env.GOOGLE_API_KEY,prompt);
+  for await (const chunk of response) {
+    const chunkText = chunk.text();
+    console.log(chunkText);
+    yield chunkText
+  }
+
 });
 export const useDomain = routeLoader$((requestEvent) => {
   return process.env.NODE_ENV !== "production"?requestEvent.request.url:requestEvent.request.url.replace(/http:\/\//g, 'https://'); // returns the domain name
@@ -116,9 +122,13 @@ export default component$(() => {
     <>
     <div class="flex flex-col m-5">
       <textarea bind:value={inputPrompt}  class="rounded-md border border-gray-300 p-2 grow mb-2"></textarea>
-      <button     onClick$={async() =>{
-        const generated=await generateText(inputPrompt.value);
-        generatedText.value=generated;
+      <button onClick$={async() =>{
+        generatedText.value="";
+        const response=await generateText(inputPrompt.value);
+        for await (const chunk of response) {
+          const chunkText = chunk;
+          generatedText.value += chunkText;
+        }
       }} class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Submit</button>
     </div>
     <div class="m-5 rounded-md bg-gray-200 border border-gray-300 p-4 shadow-md">
