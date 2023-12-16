@@ -2,17 +2,8 @@ import playwright from 'playwright';
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
+import {decodeFromHex} from "~/utils/encode";
 
-export function decodeFromHex(hexUrl:string) {
-    const buffer = Buffer.from(hexUrl, 'hex');
-    return buffer.toString('utf-8');
-}
-export function encodeToHex(url:string) {
-    const buffer = Buffer.from(url, 'utf-8');
-    const hexUrl = buffer.toString('hex');
-
-    return hexUrl;
-}
 export async function generateOgImage(url: string): Promise<void> {
 
     const decoded=decodeFromHex(url.split('.').slice(0, -1).join('.'));

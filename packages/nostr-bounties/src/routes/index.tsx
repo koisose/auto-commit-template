@@ -2,7 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import NostrComponent from '~/components/nostr/nostr';
-import {encodeToHex} from '~/utils/create-image'
+import {encodeToHex} from '~/utils/encode'
 export const useDomain = routeLoader$((requestEvent) => {
   return process.env.NODE_ENV !== "production"?requestEvent.request.url:requestEvent.request.url.replace(/http:\/\//g, 'https://'); // returns the domain name
 });

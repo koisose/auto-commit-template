@@ -12,6 +12,15 @@ importers:
         specifier: ^8.0.3
         version: 8.0.3
 
+  packages/all-about-ai:
+    dependencies:
+      '@google/generative-ai':
+        specifier: ^0.1.1
+        version: 0.1.1
+      ky:
+        specifier: ^1.1.3
+        version: 1.1.3
+
   packages/nostr-bounties:
     dependencies:
       '@google-ai/generativelanguage':
