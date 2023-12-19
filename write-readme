@@ -23,7 +23,7 @@ else
 fi
 
 # Add header and blank line
-echo "# List of Projects" >> "$README_FILE"
+echo "# List of Packages" >> "$README_FILE"
 echo "" >> "$README_FILE"
 
 # Loop through each child in the target directory
