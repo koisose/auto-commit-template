@@ -10,7 +10,8 @@
     "nostr-prettier": "pnpm --filter nostr fmt",
     "ai-prettier": "pnpm --filter @koisose/ai fmt",
     "scripts-prettier": "pnpm --filter scripts fmt",
-    "screenshot": "pnpm --filter screenshot run"
+    "screenshot": "pnpm --filter screenshot run",
+    "screenshot-prettier": "pnpm --filter screenshot fmt"
   },
   "keywords": [],
   "author": "",

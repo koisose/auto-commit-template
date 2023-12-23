@@ -5,3 +5,4 @@ bash write-readme
 pnpm run nostr-prettier
 pnpm run ai-prettier
 pnpm run scripts-prettier
+pnpm run screenshot-prettier
