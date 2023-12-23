@@ -9,7 +9,8 @@
     "commit": "pnpm --filter scripts commit",
     "nostr-prettier": "pnpm --filter nostr fmt",
     "ai-prettier": "pnpm --filter @koisose/ai fmt",
-    "scripts-prettier": "pnpm --filter scripts fmt"
+    "scripts-prettier": "pnpm --filter scripts fmt",
+    "screenshot": "pnpm --filter screenshot run"
   },
   "keywords": [],
   "author": "",

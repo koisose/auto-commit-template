@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 import { execSync, spawn } from "child_process";
 import ky from "ky";
-
+import { encode, isWithinTokenLimit, decode } from "gpt-tokenizer";
 dotenv.config();
 
 const API_KEY = process.env.GOOGLE_API_KEY; // Replace with your actual API key
@@ -13,7 +13,7 @@ const systemMessage = `You are a commit message generator by creating exactly on
 <body>
 ---
 
-With allowed <type> values are feat, fix, perf, docs, style, refactor, test, and build. Translate the commit <subject> and <body> to indonesian language. And here's an example of a good commit message:
+With allowed <type> values are feat, fix, perf, docs, style, refactor, test, and build. And here's an example of a good commit message:
 
 ---
 😆 fix(middleware): ensure Range headers adhere more closely to RFC 2616
