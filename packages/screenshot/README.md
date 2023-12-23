@@ -17,4 +17,3 @@ to set your quota on google cloud after `gcloud auth login` in order for `@googl
 ```
 gcloud auth application-default set-quota-project <your project id>
 ```
-
