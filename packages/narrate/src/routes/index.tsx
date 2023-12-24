@@ -9,7 +9,7 @@ const generateTextFromImage = server$(async function* (imageBase64: string) {
      maxOutputTokens: 100,
   } });
 
-  const prompt = `Deskripsikan gambar berikut ini, katakan jika ada yang lucu, jangan mengulangi kata kata yang sama`;
+  const prompt = `Deskripsikan gambar berikut ini, jangan mengulangi kata kata yang sama`;
  
   const imageParts = [
     
@@ -102,7 +102,7 @@ function delay(ms) {
  }
 export default component$(() => {
   const videoRef = useSignal<Element>();
-  
+  const imgRef = useSignal<Element>();
   const generatedText = useSignal<string>();
  
   const checkVideoRef = useSignal<Boolean>(false);
@@ -132,6 +132,10 @@ export default component$(() => {
           checkSpeak.value=false
           console.log("speak")
           const imageBase64=takeVideoScreenshot(videoRef.value);
+
+          if (imgRef.value) {
+            (imgRef.value as HTMLImageElement).src = "data:image/png;base64," + imageBase64;
+          }
           generatedText.value="";
           const response = await generateTextFromImage(imageBase64);
           for await (const chunk of response) {
@@ -174,6 +178,8 @@ export default component$(() => {
       checkSpeak.value=false
       stopCapture(videoRef.value);}}>stop</button>
     <video  width="320" height="240" ref={videoRef} id="video" autoplay></video>
+    gambare:
+    <img ref={imgRef} src="" width="320" height="240"/>
       <h1>Narrated Text:</h1>
       <p>
         {generatedText.value}

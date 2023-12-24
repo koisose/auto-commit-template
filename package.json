@@ -11,7 +11,8 @@
     "ai-prettier": "pnpm --filter @koisose/ai fmt",
     "scripts-prettier": "pnpm --filter scripts fmt",
     "screenshot": "pnpm --filter screenshot run",
-    "screenshot-prettier": "pnpm --filter screenshot fmt"
+    "screenshot-prettier": "pnpm --filter screenshot fmt",
+    "narrate-prettier": "pnpm --filter narrate fmt"
   },
   "keywords": [],
   "author": "",
