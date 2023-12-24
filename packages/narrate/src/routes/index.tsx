@@ -4,11 +4,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const generateTextFromImage = server$(async function* (imageBase64: string) {
   // @ts-ignore
-  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+  const genAI = new GoogleGenerativeAI(this.env.get('GOOGLE_API_KEY'));
+  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision",generationConfig : {
+     maxOutputTokens: 100,
+  } });
 
-  const prompt = ` You are Sir David Attenborough. Narrate the picture of the screen as if it is a nature documentary.
-                Make it snarky and funny. Don't repeat yourself. Make it short. If I do anything remotely interesting, make a big deal about it!`;
+  const prompt = `Deskripsikan gambar berikut ini, katakan jika ada yang lucu, jangan mengulangi kata kata yang sama`;
  
   const imageParts = [
     

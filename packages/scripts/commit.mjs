@@ -81,8 +81,8 @@ async function run() {
   try {
     const allModel = await listModel();
     const geminiProTokenLimit = allModel.models[3].inputTokenLimit;
-//    execSync(`cd ../../ && bash add-first-untracked.sh`);
-    execSync(`git add -A`);
+        execSync(`cd ../../ && bash add-first-untracked.sh`);
+//    execSync(`git add -A`);
     const diffString = await gitDiffStaged();
     if (!diffString.trim()) {
       throw { status: 5001, message: "No changes to commit" };
@@ -99,7 +99,7 @@ async function run() {
     const text = response.text();
     console.log(text);
     //            execSync(`git reset`);
-//    execSync(`git add -A`);
+        execSync(`git add -A`);
     execSync(`printf "${text.replace(/\`/gi, "\\`")}" | git commit -F-`);
     execSync("git push -u origin HEAD");
     process.exit();
